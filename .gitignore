@@ -1,0 +1,6 @@
+*.py[cod]*
+.project
+db.sqlite3
+wechat_debug.log
+CONFIGS.py
+
