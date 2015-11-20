@@ -18,10 +18,9 @@ def authentication(request):
     token = settings.TOKEN
     temp_array = sorted([token, timestamp, nonce])
     temp_str = ''.join(temp_array)
-    temp_str = sha.new(temp_str).digest()
-    if temp_str == str(signature):
+    hex_str = sha.new(temp_str).hexdigest()
+    if hex_str == str(signature):
         return HttpResponse(echostr)
     else:
-        logger.warning('signature: %s, timestamp: %s, nonce: %s, echostr: %s', signature, timestamp, nonce, echostr)
-        logger.warning('sha_str: %s', temp_str)
+        logger.warning('signature: %s, timestamp: %s, nonce: %s, echostr: %s, sha_str: %s', signature, timestamp, nonce, echostr, hex_str)
         return HttpResponse('Failed')
